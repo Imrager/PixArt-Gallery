@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router()
 
 const image = require("../api/imageAPI");
 const user = require("../api/userAPI");
@@ -11,7 +11,7 @@ router.delete('/:userID', user.deleteUser)
 router.get('/:userID/gallery', image.getImageByUserId)
 router.post('/:userID/gallery', image.createImages)
 router.put('/:userID/gallery', image.updateImage)
-router.delete('/:userID/gallery', user.deleteImage)
+router.delete('/:userID/gallery', image.deleteImage)
 
 
 
