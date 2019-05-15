@@ -2,7 +2,7 @@ const mongoose = require('../db/connection');
 
 let UserSchema = mongoose.Schema({
     name: String,
-    gallery: [
+    images: [
     ]
   });
 
