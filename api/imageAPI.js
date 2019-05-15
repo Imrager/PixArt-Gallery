@@ -1,8 +1,9 @@
-const mongoose = require('./connection.js');
+const mongoose = require('../db/connection');
 const ObjectId = mongoose.Schema.Types.ObjectId
 
 let ImagesSchema = mongoose.Schema({
   imageUrl: String,
+  description: String,
   userId: ObjectId
 });
 
@@ -27,8 +28,8 @@ function getImageByUserId(userid){
     return ImagesCollection.find({ userId: userid })
 }
 
-function updateImage(userId, image) {
-    return ImagesCollection.updateOne({ _id: userId}, {...image});
+function updateImage(userId, imageUrl) {
+    return ImagesCollection.updateOne({ _id: userId}, {...imageUrl});
 }
   
 
