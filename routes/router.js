@@ -16,9 +16,9 @@ router.delete('/:userId', user.deleteUser)
 
 router.get('/:userId/gallery/', image.getImageByUserId)
 router.post('/:userId/gallery', image.createImages)
-// router.put('/:userId/gallery', image.updateImage)
 
 router.get('/:userId/gallery/:imageId', image.getImage)
+router.put('/:userId/gallery/:imageId', image.updateImage)
 router.delete('/:userId/gallery/:imageId', image.deleteImage)
 
 

@@ -31,7 +31,7 @@ function getImage(req,res) {
     });
 }
 function deleteImage(req, res) {
-    return ImagesCollection.deleteOne(req.params.imageId).then(image=>{
+    return ImagesCollection.deleteOne({_id: req.params.imageId}).then(image=>{
         res.json(image)
     });
 }
@@ -42,8 +42,10 @@ function getImageByUserId(req, res) {
       })
 }
 
-function updateImage(userId, imageUrl) {
-    return ImagesCollection.updateOne({ _id: userId }, { ...imageUrl });
+function updateImage(req, res) {
+    return ImagesCollection.updateOne( req.params.imageId, req.body, {new: true}).then(image =>{
+        res.json(image)
+    });
 }
 
 
