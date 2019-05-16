@@ -14,10 +14,12 @@ router.get('/:userId', user.getUser)
 // router.post('/:userId', user.createUser)
 router.delete('/:userId', user.deleteUser)
 
-router.get('/:userId/gallery', image.getImageByUserId)
+router.get('/:userId/gallery/', image.getImageByUserId)
 router.post('/:userId/gallery', image.createImages)
 // router.put('/:userId/gallery', image.updateImage)
-// router.delete('/:userId/gallery', image.deleteImage)
+
+router.get('/:userId/gallery/:imageId', image.getImage)
+router.delete('/:userId/gallery/:imageId', image.deleteImage)
 
 
 

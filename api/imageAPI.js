@@ -11,20 +11,29 @@ let ImagesSchema = mongoose.Schema({
 let ImagesCollection = mongoose.model('Images', ImagesSchema);
 
 function createImages(req, res) {
-    return ImagesCollection.create(req.body).then(image => {
+    return ImagesCollection.create({
+        name: '',
+        imageUrl: '',
+        description: '',
+        userId: req.params.userId}).then(image => {
         res.json(image)
     });
 }
+
 
 function getImages() {
     return ImagesCollection.find();
 }
 
-function getImage(imageId) {
-    return ImagesCollection.findById(imageId);
+function getImage(req,res) {
+    return ImagesCollection.findById(req.params.imageId).then(image =>{
+        res.json(image)
+    });
 }
-function deleteImage(userId) {
-    return ImagesCollection.deleteOne({ _id: userId });
+function deleteImage(req, res) {
+    return ImagesCollection.deleteOne(req.params.imageId).then(image=>{
+        res.json(image)
+    });
 }
 
 function getImageByUserId(req, res) {

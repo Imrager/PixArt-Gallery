@@ -1,8 +1,8 @@
 const mongoose = require('../db/connection');
-
+const Image = require("./imageAPI")
 let UserSchema = mongoose.Schema({
   name: String,
-  images: []
+  // images: [imgID]
 });
 
 let UserCollection = mongoose.model('User', UserSchema);
@@ -19,11 +19,25 @@ function getUsers(req, res) {
   });
 }
 
+
+
+
+
+
+
 function getUser(req, res) {
   return UserCollection.findById(req.params.userId).then(userId => {
-    res.json(userId);
+          Image.ImagesCollection.find({userId: req.params.userId} ).then((images)=>{
+            res.json({userId, images});
+          })
+
+
+  
   })
 }
+
+
+
 
 function deleteUser(req, res) {
   return UserCollection.deleteOne({ _id: req.params.userId }).then(userId => {
