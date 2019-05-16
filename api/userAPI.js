@@ -1,32 +1,40 @@
 const mongoose = require('../db/connection');
 
 let UserSchema = mongoose.Schema({
-    name: String,
-    images: [
-    ]
-  });
+  name: String,
+  images: []
+});
 
 let UserCollection = mongoose.model('User', UserSchema);
 
-function createUser(newUser) {
-    return UserCollection.create(newUser);
+function createUser(req, res) {
+  return UserCollection.create(req.body).then(userId => {
+    res.json(userId)
+  });
 }
 
-function getUsers() {
-  return UserCollection.find();
+function getUsers(req, res) {
+  UserCollection.find().then(users => {
+    res.json(users);
+  });
 }
 
-function getUser(userId) {
-  return UserCollection.findById(userId);
+function getUser(req, res) {
+  return UserCollection.findById(req.params.userId).then(userId => {
+    res.json(userId);
+  })
 }
 
-function deleteUser(userId) {
-  return UserCollection.deleteOne({_id: userId});
+function deleteUser(req, res) {
+  return UserCollection.deleteOne({ _id: req.params.userId }).then(userId => {
+    res.json(userId);
+  });
 }
 
 module.exports = {
   createUser,
   getUsers,
   getUser,
-  deleteUser
+  deleteUser,
+  UserCollection
 }
