@@ -1,31 +1,21 @@
 
-// import './App.css';
 import React, { Component } from 'react'
-import axios from 'axios'
-
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Users from './components/Users'
+import User from './components/User'
 
 class App extends Component {
-  
-
   render () {
     return (
-      <div >
-     <h1>PixArt</h1>
-     {
-            this.state.users.map((user, index)=> {
-                return (
-                    <div key={index}>
-            {user.name}
-                        {/* <Link
-                            to={`/${creature._id}`}
-                        >
-                            {creature.name}
-                        </Link> */}
-                    </div>
-                )
-            })
-        }
-    </div>
+      <Router>
+        <div>
+          <h1>Pixart</h1>
+          <Switch>
+            <Route exact path="/" component={Users}/>
+            <Route path="/:id" component={User}/> 
+          </Switch>
+        </div>
+      </Router>
     )
   }
 }
