@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -21,7 +21,30 @@
 
 .App-link {
   color: #61dafb;
+} */
+.background{
+  height: 100vh;
+  background-color: lightblue;
 }
+header{
+  height: 20vh;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  background: url(./images/pixelbackground.gif);
+  background-size: 100% 250%;
+  background-repeat: no-repeat;
+  background-color: white;
+  color:white;
+}
+#title{
+  margin-right: 45%;
+  font-size: 275%
+}
+#nyanCat{
+  height: 120%;
+}
+
 
 @keyframes App-logo-spin {
   from {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
+
 class Users extends Component {
     state = {
         users: []
@@ -17,19 +18,18 @@ class Users extends Component {
     }
     render() {
         return (
-            <div>
+            <ul>
                 {this.state.users.map((user, index) => {
                     return (
-                        <div key={index}>
-
+                        <li key={index}>
                         <Link to={`/${user._id}`}>
                             {user.name}
                         </Link>
-                        </div>
+                        </li>
                     )
                 })
                 }
-            </div>
+            </ul>
         );
     }
 }
