@@ -43,7 +43,7 @@ function getImageByUserId(req, res) {
 }
 
 function updateImage(req, res) {
-    return ImagesCollection.updateOne( req.params.imageId, req.body, {new: true}).then(image =>{
+    return ImagesCollection.findByIdAndUpdate( req.params.imageId, req.body, {new: true}).then(image =>{
         res.json(image)
     });
 }
