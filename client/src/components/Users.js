@@ -63,6 +63,8 @@ class Users extends Component {
                 })
                 }
             </ul>
+            <br></br>
+          <Link to='/'>Go to Home</Link>
             </div>
         );
     }

@@ -68,15 +68,15 @@ class User extends Component {
                     <button>Update</button>
                 </form>
                 {this.state.images.map(image => {
-                    let imgUrl = <img src={image.imageUrl}></img>
+                    let imgUrl = <img height='300px' src={image.imageUrl}></img>
                     let imgName = <h2>{image.name}</h2>
-                    return imgUrl
+                    return <div>{imgName}<Link to={`/${image.userId}/gallery/${image._id}`}>{imgUrl}</Link></div>
                 })}
                 {/* {this.state.images.map(image => {
                     return image.name
                 })} */}
                 <br></br>
-                <Link to='/'>Go to Home</Link>
+          <Link to='/'>Go to Home</Link>
             </div>
         );
     }

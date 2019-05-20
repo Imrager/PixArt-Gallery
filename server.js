@@ -7,7 +7,7 @@ app.use(logger('dev'))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/api', routes)
+app.use('/api/', routes)
 
 
 
