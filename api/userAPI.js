@@ -18,28 +18,19 @@ function getUsers(req, res) {
     res.json(users);
   });
 }
-
-
-
-
-
-
-
 function getUser(req, res) {
   return UserCollection.findById(req.params.userId)
-  .then(userId => {
-          Image.ImagesCollection.find({userId: req.params.userId} ).then((images)=>{
-            res.json({userId, images});
-          })
-
-
-  
-  })
+    .then(userId => {
+      Image.ImagesCollection.find({ userId: req.params.userId }).then((images) => {
+        res.json({ userId, images });
+      })
+    })
 }
-
-
-
-
+function updateUser(req, res) {
+  return UserCollection.findByIdAndUpdate(req.params.userId, req.body, { new: true }).then(user => {
+    res.json(user)
+  });
+}
 function deleteUser(req, res) {
   return UserCollection.deleteOne({ _id: req.params.userId }).then(userId => {
     res.json(userId);
@@ -51,5 +42,6 @@ module.exports = {
   getUsers,
   getUser,
   deleteUser,
-  UserCollection
+  UserCollection,
+  updateUser
 }
