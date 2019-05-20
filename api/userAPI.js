@@ -26,7 +26,8 @@ function getUsers(req, res) {
 
 
 function getUser(req, res) {
-  return UserCollection.findById(req.params.userId).then(userId => {
+  return UserCollection.findById(req.params.userId)
+  .then(userId => {
           Image.ImagesCollection.find({userId: req.params.userId} ).then((images)=>{
             res.json({userId, images});
           })
