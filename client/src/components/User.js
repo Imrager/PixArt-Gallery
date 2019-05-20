@@ -36,7 +36,7 @@ class User extends Component {
             
             <div>
 
-                <h1>{this.state.user.name}</h1>
+                <h1>{this.state.user.name}</h1><button onClick={this.deleteUser}>Delete</button>
                 {this.state.images.map(image => {
                     let imgUrl = <img src={image.imageUrl}></img>
                     let imgName = <h2>{image.name}</h2>
