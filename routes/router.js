@@ -12,6 +12,7 @@ router.post('/', user.createUser)
 
 router.get('/:userId', user.getUser)
 // router.post('/:userId', user.createUser)
+router.put('/:userId', user.updateUser)
 router.delete('/:userId', user.deleteUser)
 
 router.get('/:userId/gallery/', image.getImageByUserId)
