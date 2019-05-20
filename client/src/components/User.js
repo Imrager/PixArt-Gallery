@@ -76,7 +76,7 @@ class User extends Component {
                     return image.name
                 })} */}
                 <br></br>
-          <Link to='/'>Go to Home</Link>
+                <Link to='/'>Go to Home</Link>
             </div>
         );
     }

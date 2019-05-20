@@ -10,15 +10,22 @@ class PixArt extends Component {
             description: ''
         }
     }
+   
     getImage = () => {
-        axios.get(`/${this.props.match.params.id}/gallery/${this.props.match.params.imageId}`).then(res => {
-            this.setState({ image: res.data.images })
+        axios.get(`/api/${this.props.match.params.id}/gallery/${this.props.match.params.imageId}`).then(res => {console.log("rest",res)
+            this.setState({ image: res.data })
         })
+
+    }
+    componentDidMount(){
+        this.getImage()
     }
     render() {
         return (
             <div>
-                <h1>{this.state.image.imageUrl} hi</h1>
+                <img src={this.state.image.imageUrl}/>
+                <br></br>
+                <Link to='/'>Go to Home</Link>
             </div>
         );
     }
