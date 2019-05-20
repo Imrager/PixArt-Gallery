@@ -7,6 +7,9 @@ class User extends Component {
         user: {
             name: ''
         },
+        formUser: {
+            name: ''
+        },
         images: [],
         redirectToHome: false
     }
@@ -22,6 +25,19 @@ class User extends Component {
             this.setState({redirectToHome: true})
         })
     }
+    updateUser = () => {
+        axios.put(`/api/${this.props.match.params.id}`, {
+              name: this.state.formUser.name
+          })
+          .then(res => {
+              this.setState({user: res.data})
+          })
+    }
+    handleChange = (e) => {
+        const cloneNewUser = {...this.state.formUser}
+        cloneNewUser[e.target.name] = e.target.value
+        this.setState({formUser: cloneNewUser})
+      }
     componentDidMount() {
         this.getUser()
     }
@@ -37,6 +53,20 @@ class User extends Component {
             <div>
 
                 <h1>{this.state.user.name}</h1><button onClick={this.deleteUser}>Delete</button>
+                <br></br>
+                <form onSubmit={this.updateUser}>
+                    <div>
+                        <label htmlFor="name">Update Name</label>
+                        <input
+                            id="name"
+                            type="text"
+                            name="name"
+                            onChange={this.handleChange}
+                            value={this.state.formUser.name}
+                        />
+                    </div>
+                    <button>Update</button>
+                </form>
                 {this.state.images.map(image => {
                     let imgUrl = <img src={image.imageUrl}></img>
                     let imgName = <h2>{image.name}</h2>

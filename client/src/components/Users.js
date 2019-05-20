@@ -23,11 +23,8 @@ class Users extends Component {
         this.setState({newUser: cloneNewUser})
       }
     createUser = () => {
-        
-        axios
-            .post('/api/', {
-                name: this.state.newUser.name
-            })
+        axios.post('/api/', {
+            name: this.state.newUser.name})
             .then(res => {
                 const userList = [...this.state.users]
                 userList.unshift(res.data)
@@ -38,20 +35,18 @@ class Users extends Component {
                     user: userList
                 })
             })
-    
       }
     render() {
         return (
             <div>
             <form onSubmit={this.createUser}>
                     <div>
-                        <label htmlFor="name">Name</label>
+                        <label htmlFor="name">Create User</label>
                         <input
                             id="name"
                             type="text"
                             name="name"
                             onChange={this.handleChange}
-                            // value={this.state.newUser.name}
                         />
                     </div>
                     <button>Create</button>
