@@ -1,6 +1,13 @@
 #background{
- background-color: antiquewhite;
+ background-color: black;
  height: 100vh;
+ display: flex;
+ justify-content: center;
+}
+section{
+    padding-top: 3%;
+    width: 60vw;
+    background-color: white;
 }
 form{
     width: 50vw;
@@ -13,9 +20,10 @@ li{
     padding: 5px;
 }
 article{
-    display: flex;
-
+   
+    padding-left: 20%;
 }
 nav{
+    padding-left: 20%;
     padding-bottom: 10px;
 }

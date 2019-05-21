@@ -13,19 +13,20 @@ class Users extends Component {
             this.setState({ users: res.data })
         })
     }
-    
+
 
     componentDidMount = () => {
         this.getAllUsers()
     }
     handleChange = (e) => {
-        const cloneNewUser = {...this.state.newUser}
+        const cloneNewUser = { ...this.state.newUser }
         cloneNewUser[e.target.name] = e.target.value
-        this.setState({newUser: cloneNewUser})
-      }
+        this.setState({ newUser: cloneNewUser })
+    }
     createUser = () => {
         axios.post('/api/', {
-            name: this.state.newUser.name})
+            name: this.state.newUser.name
+        })
             .then(res => {
                 const userList = [...this.state.users]
                 userList.unshift(res.data)
@@ -36,42 +37,39 @@ class Users extends Component {
                     user: userList
                 })
             })
-      }
+    }
     render() {
         return (
-            
+
             <div id="background">
-            <nav>
-            <Link to='/'>Go to Users</Link>
-            </nav>
-            <article>
-            <form onSubmit={this.createUser}>
-                    <div>
-                        <label htmlFor="name">Create User</label>
-                        <input
-                            id="name"
-                            type="text"
-                            name="name"
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <button>Create</button>
-                </form>
-            <ul>
-                {this.state.users.map((user, index) => {
-                    return (
-                        <li key={index}>
-                        <Link to={`/${user._id}`}>
-                            {user.name}
-                        </Link>
-                        </li>
-                    )
-                })
-                }
-            </ul>
-            </article>
-            <br></br>
-          
+                <section>
+                    <article>
+                        <form onSubmit={this.createUser}>
+                            <div>
+                                <label htmlFor="name">Create User</label>
+                                <input
+                                    id="name"
+                                    type="text"
+                                    name="name"
+                                    onChange={this.handleChange}
+                                />
+                            </div>
+                            <button>Create</button>
+                        </form>
+                        <ul>
+                            {this.state.users.map((user, index) => {
+                                return (
+                                    <li key={index}>
+                                        <Link to={`/${user._id}`}>
+                                            {user.name}
+                                        </Link>
+                                    </li>
+                                )
+                            })
+                            }
+                        </ul>
+                    </article>
+                </section>
             </div>
         );
     }
