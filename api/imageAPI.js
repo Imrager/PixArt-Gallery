@@ -8,14 +8,11 @@ let ImagesSchema = mongoose.Schema({
     userId: ObjectId
 });
 
+
 let ImagesCollection = mongoose.model('Images', ImagesSchema);
 
 function createImage(req, res) {
-    return ImagesCollection.create({
-        name: '',
-        imageUrl: '',
-        description: '',
-        userId: req.params.userId}).then(image => {
+    return ImagesCollection.create(req.body).then(image => {
         res.json(image)
     });
 }

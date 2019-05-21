@@ -9,8 +9,22 @@
     background-color: white;
     padding: 0;
     display: flex;
+    flex-wrap: wrap;
+    
 }
 #userSetting{
     width: 40%;
+    height: 130px;
     border: 2px solid lightgrey;
+}
+#topArticle{
+    display: flex;
+}
+#createForm{
+    width:60%;
+    display:flex;
+}
+#gallery{
+    display: flex;
+    flex-wrap: wrap
 }

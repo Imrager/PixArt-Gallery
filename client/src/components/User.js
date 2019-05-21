@@ -6,10 +6,17 @@ import '../components/User.css'
 class User extends Component {
     state = {
         user: {
-            name: ''
+            name: '',
+            _id: ''
         },
         formUser: {
             name: ''
+        }, 
+        newImage: {
+            name: '',
+            imageUrl: '',
+            description: '',
+            userId: this.props.match.params.id
         },
         images: [],
         redirectToHome: false
@@ -34,22 +41,21 @@ class User extends Component {
                 this.setState({ user: res.data })
             })
     }
-    createImage = () => {
-        console.log(this.state.images)
-        axios.post(`/api/${this.props.match.params.id}`, {
-            name: this.state.newImage.name
-        })
-            .then(res => {
-                const imageList = [...this.state.images]
-                imageList.unshift(res.data)
-                this.setState({
-                    newImage: {
-                        name: '',
-                        imageUrl: '',
-                        description: ''
-                    }
-                })
-            })
+    createImage = (e) => {
+        e.preventDefault()
+        console.log(this.state.newImage)
+        axios.post(`/api/${this.props.match.params.id}/gallery`, this.state.newImage)
+            // .then(res => {
+            //     const imageList = [...this.state.images]
+            //     imageList.unshift(res.data)
+            //     this.setState({
+            //         newImage: {
+            //             name: '',
+            //             imageUrl: '',
+            //             description: ''
+            //         }
+            //     })
+            // })
         this.getUser()
     }
     handleChange = (e) => {
@@ -57,7 +63,11 @@ class User extends Component {
         cloneNewUser[e.target.name] = e.target.value
         this.setState({ formUser: cloneNewUser })
     }
-
+    handleChangeImage = (e) => {
+        const cloneNewImage = { ...this.state.newImage }
+        cloneNewImage[e.target.name] = e.target.value
+        this.setState({ newImage: cloneNewImage })
+    }
     componentDidMount() {
         this.getUser()
     }
@@ -70,6 +80,7 @@ class User extends Component {
 
             <div class='background2'>
                 <article id='userArt'>
+                    <div id='topArticle'>
                     <div id='userSetting'>
                     <h1>{this.state.user.name}</h1>
                     <button onClick={this.deleteUser}>Delete</button>
@@ -89,18 +100,28 @@ class User extends Component {
                         <button>Update</button>
                     </form>
                     </div>
-                    <form onSubmit={this.createImage}>
+
+
+
+
+
+
+
+
+
+                    <form onSubmit={this.createImage} id='createForm'>
                         <div>
                             <label htmlFor="imageName">Name</label>
-                            <input id="imageName" type="text" name='name' onChange={this.handleChange} />
+                            <input id="imageName" type="text" name='name' onChange={this.handleChangeImage} />
                             <label htmlFor="imageUrl">Link</label>
-                            <input id="imageUrl" type="file" name="imageUrl" onChange={this.handleChange} />
+                            <input id="imageUrl" type="file" name="imageUrl" onChange={this.handleChangeImage} />
                             <label htmlFor="description">Description</label>
-                            <input id="description" type="text" name="description" onChange={this.handleChange} />
+                            <input id="description" type="text" name="description" onChange={this.handleChangeImage} />
+                            <input id="description" type="text" value={this.state.user._id} name="userId" hidden="hidden" onChange={this.handleChangeImage} />
                         </div>
                         <button>Create</button>
                     </form>
-
+            </div>
 
                     <div id='gallery'>
                     {this.state.images.map(image => {
