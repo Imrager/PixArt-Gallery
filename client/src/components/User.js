@@ -19,7 +19,7 @@ class User extends Component {
             userId: this.props.match.params.id
         },
         images: [],
-        redirectToHome: false
+        redirectToHome: false,
     }
     getUser = () => {
         axios.get(`/api/${this.props.match.params.id}`).then(res => {
@@ -47,6 +47,7 @@ class User extends Component {
         console.log(this.state.newImage)
         axios.post(`/api/${this.props.match.params.id}/gallery`, this.state.newImage)
         this.getUser()
+        this.cancelCourse()
     }
     handleChange = (e) => {
         const cloneNewUser = { ...this.state.formUser }
@@ -61,11 +62,16 @@ class User extends Component {
     componentDidMount() {
         this.getUser()
     }
+
+    cancelCourse = () => { 
+        document.getElementById("createForm").reset();
+      }
     render() {
 
         if (this.state.redirectToHome) {
             return (< Redirect to="/" />)
         }
+    
         return (
 
             <div class='background2'>
@@ -89,6 +95,7 @@ class User extends Component {
                         </div>
                         <button>Update</button>
                     </form>
+                    <Link to='/' id='homeLink'>Go to Users</Link>
                     </div>
 
 
@@ -114,7 +121,7 @@ class User extends Component {
             </div>
 
                     <div id='gallery'>
-                    <Link to='/' id='homeLink'>Go to Home</Link>
+                    
                     {this.state.images.map(image => {
                         let imgUrl = <img height='300px' src={image.imageUrl}></img>
                         let imgName = <h2>{image.name}</h2>

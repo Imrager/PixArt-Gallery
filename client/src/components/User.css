@@ -31,10 +31,19 @@
     flex-wrap: wrap;
 }
 #gallery{
+    text-align: center;
     display: flex;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     padding-left: 10px;
 }
 #homeLink{
-    
+    float: left;
+    height: 25px;
+    background-color: lightgrey;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
 }
+a:visited{
+    color: black;
+} 
