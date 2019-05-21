@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { Redirect, Link } from 'react-router-dom'
+import '../components/User.css'
 
 class User extends Component {
     state = {
@@ -22,21 +23,22 @@ class User extends Component {
     }
     deleteUser = () => {
         axios.delete(`/api/${this.props.match.params.id}`).then(res => {
-            this.setState({redirectToHome: true})
+            this.setState({ redirectToHome: true })
         })
     }
     updateUser = () => {
         axios.put(`/api/${this.props.match.params.id}`, {
-              name: this.state.formUser.name
-          })
-          .then(res => {
-              this.setState({user: res.data})
-          })
+            name: this.state.formUser.name
+        })
+            .then(res => {
+                this.setState({ user: res.data })
+            })
     }
     createImage = () => {
         console.log(this.state.images)
         axios.post(`/api/${this.props.match.params.id}`, {
-            name: this.state.newImage.name})
+            name: this.state.newImage.name
+        })
             .then(res => {
                 const imageList = [...this.state.images]
                 imageList.unshift(res.data)
@@ -48,63 +50,68 @@ class User extends Component {
                     }
                 })
             })
-            this.getUser()
-      }
+        this.getUser()
+    }
     handleChange = (e) => {
-        const cloneNewUser = {...this.state.formUser}
+        const cloneNewUser = { ...this.state.formUser }
         cloneNewUser[e.target.name] = e.target.value
-        this.setState({formUser: cloneNewUser})
-      }
-    
+        this.setState({ formUser: cloneNewUser })
+    }
+
     componentDidMount() {
         this.getUser()
     }
     render() {
-        
-        if(this.state.redirectToHome) {
+
+        if (this.state.redirectToHome) {
             return (< Redirect to="/" />)
         }
         return (
-            
-            <div>
 
-                <h1>{this.state.user.name}</h1><button onClick={this.deleteUser}>Delete</button>
-                <br></br>
-                <form onSubmit={this.updateUser}>
-                    <div>
-                        <label htmlFor="name">Update Name</label>
-                        <input
-                            id="name"
-                            type="text"
-                            name="name"
-                            onChange={this.handleChange}
-                            value={this.state.formUser.name}
-                        />
+            <div class='background2'>
+                <article id='userArt'>
+                    <div id='userSetting'>
+                    <h1>{this.state.user.name}</h1>
+                    <button onClick={this.deleteUser}>Delete</button>
+                    
+                    <br></br>
+                    <form onSubmit={this.updateUser} id="updateForm">
+                        <div>
+                            <label htmlFor="name">Update Name</label>
+                            <input
+                                id="name"
+                                type="text"
+                                name="name"
+                                onChange={this.handleChange}
+                                value={this.state.formUser.name}
+                            />
+                        </div>
+                        <button>Update</button>
+                    </form>
                     </div>
-                    <button>Update</button>
-                </form>
+                    <form onSubmit={this.createImage}>
+                        <div>
+                            <label htmlFor="imageName">Name</label>
+                            <input id="imageName" type="text" name='name' onChange={this.handleChange} />
+                            <label htmlFor="imageUrl">Link</label>
+                            <input id="imageUrl" type="file" name="imageUrl" onChange={this.handleChange} />
+                            <label htmlFor="description">Description</label>
+                            <input id="description" type="text" name="description" onChange={this.handleChange} />
+                        </div>
+                        <button>Create</button>
+                    </form>
 
-                <form onSubmit={this.createImage}>
-                    <div>
-                        <label htmlFor="imageName">Name</label>
-                        <input id="imageName" type="text" name='name' onChange={this.handleChange}/>
-                        <label htmlFor="imageUrl">Link</label>
-                        <input id="imageUrl" type="file" name="imageUrl" onChange={this.handleChange}/>
-                        <label htmlFor="description">Description</label>
-                        <input id="description" type="text" name="description" onChange={this.handleChange}/>
+
+                    <div id='gallery'>
+                    {this.state.images.map(image => {
+                        let imgUrl = <img height='300px' src={image.imageUrl}></img>
+                        let imgName = <h2>{image.name}</h2>
+                        return <div>{imgName}<Link to={`/${image.userId}/gallery/${image._id}`}>{imgUrl}</Link></div>
+                    })}
                     </div>
-                    <button>Create</button>
-                </form>
-
-
-
-                {this.state.images.map(image => {
-                    let imgUrl = <img height='300px' src={image.imageUrl}></img>
-                    let imgName = <h2>{image.name}</h2>
-                    return <div>{imgName}<Link to={`/${image.userId}/gallery/${image._id}`}>{imgUrl}</Link></div>
-                })}
-                <br></br>
-                <Link to='/'>Go to Home</Link>
+                    <br></br>
+                    <Link to='/'>Go to Home</Link>
+                </article>
             </div>
         );
     }

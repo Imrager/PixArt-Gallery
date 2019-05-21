@@ -1,0 +1,16 @@
+.background2{
+    background-color: blue;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+}
+#userArt{
+    width: 75vw;
+    background-color: white;
+    padding: 0;
+    display: flex;
+}
+#userSetting{
+    width: 40%;
+    border: 2px solid lightgrey;
+}

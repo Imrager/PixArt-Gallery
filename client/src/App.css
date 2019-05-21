@@ -22,10 +22,7 @@
 .App-link {
   color: #61dafb;
 } */
-.background{
-  height: 100vh;
-  background-color: lightblue;
-}
+
 header{
   height: 20vh;
   display:flex;
