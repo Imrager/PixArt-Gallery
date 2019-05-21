@@ -34,6 +34,7 @@ class User extends Component {
           })
     }
     createImage = () => {
+        console.log(this.state.images)
         axios.post(`/api/${this.props.match.params.id}`, {
             name: this.state.newImage.name})
             .then(res => {
@@ -44,28 +45,22 @@ class User extends Component {
                         name: '',
                         imageUrl: '',
                         description: ''
-                    },
-                    image: imageList
+                    }
                 })
             })
+            this.getUser()
       }
     handleChange = (e) => {
         const cloneNewUser = {...this.state.formUser}
         cloneNewUser[e.target.name] = e.target.value
         this.setState({formUser: cloneNewUser})
       }
-    // handleChangeImage = (e) => {
-    //     const cloneNewImage = {...this.state.newImage}
-    //     cloneNewImage[e.target.name] = e.target.value
-    //     this.setState({newImage: cloneNewImage})
-    //   }
+    
     componentDidMount() {
         this.getUser()
     }
     render() {
-        // const images = ()=>{this.state.images.map(image =>{
-        //   return  image.name
-        // })}
+        
         if(this.state.redirectToHome) {
             return (< Redirect to="/" />)
         }
@@ -89,18 +84,18 @@ class User extends Component {
                     <button>Update</button>
                 </form>
 
-
                 <form onSubmit={this.createImage}>
                     <div>
                         <label htmlFor="imageName">Name</label>
-                        <input id="imageName" type="text" name="name" onChange={this.handleChange}/>
+                        <input id="imageName" type="text" name='name' onChange={this.handleChange}/>
                         <label htmlFor="imageUrl">Link</label>
-                        <input id="imageUrl" type="text" name="imageUrl" onChange={this.handleChange}/>
+                        <input id="imageUrl" type="file" name="imageUrl" onChange={this.handleChange}/>
                         <label htmlFor="description">Description</label>
                         <input id="description" type="text" name="description" onChange={this.handleChange}/>
                     </div>
                     <button>Create</button>
                 </form>
+
 
 
                 {this.state.images.map(image => {

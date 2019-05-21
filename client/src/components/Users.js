@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import '../components/Users.css'
 
 
 class Users extends Component {
@@ -38,7 +39,12 @@ class Users extends Component {
       }
     render() {
         return (
-            <div>
+            
+            <div id="background">
+            <nav>
+            <Link to='/'>Go to Users</Link>
+            </nav>
+            <article>
             <form onSubmit={this.createUser}>
                     <div>
                         <label htmlFor="name">Create User</label>
@@ -63,8 +69,9 @@ class Users extends Component {
                 })
                 }
             </ul>
+            </article>
             <br></br>
-          <Link to='/'>Go to Home</Link>
+          
             </div>
         );
     }

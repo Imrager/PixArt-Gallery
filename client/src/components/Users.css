@@ -1,0 +1,21 @@
+#background{
+ background-color: antiquewhite;
+ height: 100vh;
+}
+form{
+    width: 50vw;
+}
+ul{
+    width: 50vw;
+    list-style: none;
+ }
+li{
+    padding: 5px;
+}
+article{
+    display: flex;
+
+}
+nav{
+    padding-bottom: 10px;
+}

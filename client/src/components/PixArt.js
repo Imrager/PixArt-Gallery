@@ -32,9 +32,9 @@ class PixArt extends Component {
         }
         return (
             <div>
-                <img src={this.state.image.imageUrl}/><button onClick={this.deleteImage}>Delete</button>
+                <img height='300px' src={this.state.image.imageUrl}/><button onClick={this.deleteImage}>Delete</button>
                 <br></br>
-                <Link to='/'>Go to Home</Link>
+                <Link to={`/${this.props.match.params.id}`}>Go to Gallery</Link>
             </div>
         );
     }
