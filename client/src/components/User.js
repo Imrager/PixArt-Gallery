@@ -41,21 +41,10 @@ class User extends Component {
                 this.setState({ user: res.data })
             })
     }
-    createImage = (e) => {
-        e.preventDefault()
+    createImage = () => {
+        
         console.log(this.state.newImage)
         axios.post(`/api/${this.props.match.params.id}/gallery`, this.state.newImage)
-            // .then(res => {
-            //     const imageList = [...this.state.images]
-            //     imageList.unshift(res.data)
-            //     this.setState({
-            //         newImage: {
-            //             name: '',
-            //             imageUrl: '',
-            //             description: ''
-            //         }
-            //     })
-            // })
         this.getUser()
     }
     handleChange = (e) => {
@@ -114,12 +103,12 @@ class User extends Component {
                             <label htmlFor="imageName">Name</label>
                             <input id="imageName" type="text" name='name' onChange={this.handleChangeImage} />
                             <label htmlFor="imageUrl">Link</label>
-                            <input id="imageUrl" type="file" name="imageUrl" onChange={this.handleChangeImage} />
+                            <input id="imageUrl" type="text" name="imageUrl" onChange={this.handleChangeImage} />
                             <label htmlFor="description">Description</label>
                             <input id="description" type="text" name="description" onChange={this.handleChangeImage} />
                             <input id="description" type="text" value={this.state.user._id} name="userId" hidden="hidden" onChange={this.handleChangeImage} />
                         </div>
-                        <button>Create</button>
+                        <button>Add Pic to Gallery</button>
                     </form>
             </div>
 
