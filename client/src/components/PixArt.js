@@ -42,7 +42,10 @@ class PixArt extends Component {
                         <br></br>
                         <Link to={`/${this.props.match.params.id}`}>Go to Gallery</Link>
                     </div>
-                    <h3></h3>
+                    <div id='description'>
+                    <h3>Description: </h3>
+                    <p> { this.state.image.description } </p>
+                    </div>
                 </div>
             </div>
         );
