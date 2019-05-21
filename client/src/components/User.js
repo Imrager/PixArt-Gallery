@@ -33,7 +33,8 @@ class User extends Component {
             this.setState({ redirectToHome: true })
         })
     }
-    updateUser = () => {
+    updateUser = (e) => {
+        e.preventDefault()
         axios.put(`/api/${this.props.match.params.id}`, {
             name: this.state.formUser.name
         })
@@ -41,8 +42,8 @@ class User extends Component {
                 this.setState({ user: res.data })
             })
     }
-    createImage = () => {
-        
+    createImage = (e) => {
+        e.preventDefault()
         console.log(this.state.newImage)
         axios.post(`/api/${this.props.match.params.id}/gallery`, this.state.newImage)
         this.getUser()
@@ -100,11 +101,11 @@ class User extends Component {
 
                     <form onSubmit={this.createImage} id='createForm'>
                         <div>
-                            <label htmlFor="imageName">Name</label>
+                            <label htmlFor="imageName">Name:</label>
                             <input id="imageName" type="text" name='name' onChange={this.handleChangeImage} />
-                            <label htmlFor="imageUrl">Link</label>
+                            <label htmlFor="imageUrl"> Link:</label>
                             <input id="imageUrl" type="text" name="imageUrl" onChange={this.handleChangeImage} />
-                            <label htmlFor="description">Description</label>
+                            <label htmlFor="description"> Description:</label>
                             <input id="description" type="text" name="description" onChange={this.handleChangeImage} />
                             <input id="description" type="text" value={this.state.user._id} name="userId" hidden="hidden" onChange={this.handleChangeImage} />
                         </div>
@@ -113,14 +114,14 @@ class User extends Component {
             </div>
 
                     <div id='gallery'>
+                    <Link to='/' id='homeLink'>Go to Home</Link>
                     {this.state.images.map(image => {
                         let imgUrl = <img height='300px' src={image.imageUrl}></img>
                         let imgName = <h2>{image.name}</h2>
                         return <div>{imgName}<Link to={`/${image.userId}/gallery/${image._id}`}>{imgUrl}</Link></div>
                     })}
                     </div>
-                    <br></br>
-                    <Link to='/'>Go to Home</Link>
+                    
                 </article>
             </div>
         );

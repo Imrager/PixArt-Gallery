@@ -12,7 +12,7 @@ class App extends Component {
       <Router>
         <div className='background'>
           <header>
-            <img src={nyanCatGif} id='nyanCat'></img>
+            <img src={ nyanCatGif } id='nyanCat'></img>
           <h1 id='title'>Pixart</h1>
           </header>
           <Switch>
