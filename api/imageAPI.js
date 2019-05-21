@@ -10,7 +10,7 @@ let ImagesSchema = mongoose.Schema({
 
 let ImagesCollection = mongoose.model('Images', ImagesSchema);
 
-function createImages(req, res) {
+function createImage(req, res) {
     return ImagesCollection.create({
         name: '',
         imageUrl: '',
@@ -50,7 +50,7 @@ function updateImage(req, res) {
 
 
 module.exports = {
-    createImages,
+    createImage,
     getImages,
     getImage,
     deleteImage,

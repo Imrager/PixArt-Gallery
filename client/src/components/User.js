@@ -33,11 +33,32 @@ class User extends Component {
               this.setState({user: res.data})
           })
     }
+    createImage = () => {
+        axios.post(`/api/${this.props.match.params.id}`, {
+            name: this.state.newImage.name})
+            .then(res => {
+                const imageList = [...this.state.images]
+                imageList.unshift(res.data)
+                this.setState({
+                    newImage: {
+                        name: '',
+                        imageUrl: '',
+                        description: ''
+                    },
+                    image: imageList
+                })
+            })
+      }
     handleChange = (e) => {
         const cloneNewUser = {...this.state.formUser}
         cloneNewUser[e.target.name] = e.target.value
         this.setState({formUser: cloneNewUser})
       }
+    // handleChangeImage = (e) => {
+    //     const cloneNewImage = {...this.state.newImage}
+    //     cloneNewImage[e.target.name] = e.target.value
+    //     this.setState({newImage: cloneNewImage})
+    //   }
     componentDidMount() {
         this.getUser()
     }
@@ -67,14 +88,26 @@ class User extends Component {
                     </div>
                     <button>Update</button>
                 </form>
+
+
+                <form onSubmit={this.createImage}>
+                    <div>
+                        <label htmlFor="imageName">Name</label>
+                        <input id="imageName" type="text" name="name" onChange={this.handleChange}/>
+                        <label htmlFor="imageUrl">Link</label>
+                        <input id="imageUrl" type="text" name="imageUrl" onChange={this.handleChange}/>
+                        <label htmlFor="description">Description</label>
+                        <input id="description" type="text" name="description" onChange={this.handleChange}/>
+                    </div>
+                    <button>Create</button>
+                </form>
+
+
                 {this.state.images.map(image => {
                     let imgUrl = <img height='300px' src={image.imageUrl}></img>
                     let imgName = <h2>{image.name}</h2>
                     return <div>{imgName}<Link to={`/${image.userId}/gallery/${image._id}`}>{imgUrl}</Link></div>
                 })}
-                {/* {this.state.images.map(image => {
-                    return image.name
-                })} */}
                 <br></br>
                 <Link to='/'>Go to Home</Link>
             </div>
