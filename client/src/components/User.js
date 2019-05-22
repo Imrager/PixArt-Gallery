@@ -41,13 +41,14 @@ class User extends Component {
             .then(res => {
                 this.setState({ user: res.data })
             })
+            this.resetUpdateForm()
     }
     createImage = (e) => {
         e.preventDefault()
         console.log(this.state.newImage)
         axios.post(`/api/${this.props.match.params.id}/gallery`, this.state.newImage)
         this.getUser()
-        this.cancelCourse()
+        this.resetCreateForm()
     }
     handleChange = (e) => {
         const cloneNewUser = { ...this.state.formUser }
@@ -63,8 +64,11 @@ class User extends Component {
         this.getUser()
     }
 
-    cancelCourse = () => { 
+    resetCreateForm = () => { 
         document.getElementById("createForm").reset();
+      }
+    resetUpdateForm = () => { 
+        document.getElementById("updateForm").reset();
       }
     render() {
 
