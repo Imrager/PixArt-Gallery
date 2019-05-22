@@ -15,6 +15,7 @@ form{
 ul{
     width: 50vw;
     list-style: none;
+    font-size: 30px;
  }
 li{
     padding: 5px;
